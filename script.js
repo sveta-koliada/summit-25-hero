@@ -1,15 +1,15 @@
 // Array with image paths (10 unique images)
 const imageUrls = [
-    '/assets/sp-1.jpg',
-    '/assets/sp-2.jpg',
-    '/assets/sp-3.jpg',
-    '/assets/sp-4.jpg',
-    '/assets/sp-5.jpg',
-    '/assets/sp-6.jpg',
-    '/assets/sp-7.jpg',
-    '/assets/sp-8.jpg',
-    '/assets/sp-9.jpg',
-    '/assets/sp-10.jpg'
+    '/assets/sp-v2-1.jpg',
+    '/assets/sp-v2-2.jpg',
+    '/assets/sp-v2-3.jpg',
+    '/assets/sp-v2-4.jpg',
+    '/assets/sp-v2-5.jpg',
+    '/assets/sp-v2-1.jpg',
+    '/assets/sp-v2-2.jpg',
+    '/assets/sp-v2-3.jpg',
+    '/assets/sp-v2-4.jpg',
+    '/assets/sp-v2-5.jpg'
   ];
   
   class HorizontalImageTrail {
@@ -20,7 +20,7 @@ const imageUrls = [
       // Animation parameters
       this.totalImages = 10; // Total number of images
       this.imageWidth = 200; // Image width
-      this.imageSpacing = 250; // Distance between images
+      this.imageSpacing = 235; // Distance between images
       this.visibleImages = this.calculateVisibleImages(); // Automatic calculation of visible images
       this.images = [];
       this.currentOffset = 0; // Current trail offset
@@ -145,8 +145,11 @@ const imageUrls = [
         // Take image from array (without repetitions)
         img.src = imageUrls[i];
         
-        // No rotation - images stay straight
-        const rotation = 0;
+        // Gradient rotation from -5° to 5° across the trail
+        const minRotation = -5; // Start rotation (leftmost image - tilt left)
+        const maxRotation = 5;  // End rotation (rightmost image - tilt right)
+        const rotationProgress = i / (this.totalImages - 1); // Progress from 0 to 1
+        const rotation = minRotation + (maxRotation - minRotation) * rotationProgress;
         
         // Initial position - images arranged in arc
         const x = arcPoints.leftX + (i * this.imageSpacing);
@@ -241,8 +244,12 @@ const imageUrls = [
         const currentXInTrail = baseX - currentArcPoints.leftX; // Remove margin
         const screenProgress = Math.max(0, Math.min(1, currentXInTrail / totalWidth));
         
-        // Add vertical arc offset during scroll (arc rises up)
-        const verticalScrollOffset = scrollProgress * window.innerHeight * 0.5; // Raise arc by 50% of screen height
+        // Add vertical arc offset during scroll (arc rises up) with easing
+        // Use easeInOutCubic for smooth transition
+        const easedScrollProgress = scrollProgress < 0.5 
+          ? 4 * scrollProgress * scrollProgress * scrollProgress 
+          : 1 - Math.pow(-2 * scrollProgress + 2, 3) / 2;
+        const verticalScrollOffset = easedScrollProgress * window.innerHeight * 0.5; // Raise arc by 50% of screen height
         
         const leftY = currentArcPoints.leftY - verticalScrollOffset;
         const rightY = currentArcPoints.rightY - verticalScrollOffset;
@@ -270,8 +277,11 @@ const imageUrls = [
           // Image beyond left edge - moves to bottom left corner
           const exitProgress = Math.abs(baseX + this.imageWidth / 2) / (this.imageSpacing * 2);
           finalX = baseX - (exitProgress * this.imageSpacing * 0.5); // Further left
-          // Apply vertical offset to images beyond edge too
-          const verticalScrollOffset = scrollProgress * window.innerHeight * 0.5;
+          // Apply vertical offset to images beyond edge too (using same easing)
+          const easedScrollProgressExit = scrollProgress < 0.5 
+            ? 4 * scrollProgress * scrollProgress * scrollProgress 
+            : 1 - Math.pow(-2 * scrollProgress + 2, 3) / 2;
+          const verticalScrollOffset = easedScrollProgressExit * window.innerHeight * 0.5;
           finalY = arcY + (exitProgress * window.innerHeight * 0.4); // Down to bottom edge
           
           // Images are completely straight (0 rotation) when beyond left edge
@@ -285,8 +295,11 @@ const imageUrls = [
           // Image beyond right edge - moves to bottom right corner
           const exitProgress = (baseX - window.innerWidth - this.imageWidth / 2) / (this.imageSpacing * 2);
           finalX = baseX + (exitProgress * this.imageSpacing * 0.5); // Further right
-          // Apply vertical offset to images beyond edge too
-          const verticalScrollOffset = scrollProgress * window.innerHeight * 0.5;
+          // Apply vertical offset to images beyond edge too (using same easing)
+          const easedScrollProgressExit2 = scrollProgress < 0.5 
+            ? 4 * scrollProgress * scrollProgress * scrollProgress 
+            : 1 - Math.pow(-2 * scrollProgress + 2, 3) / 2;
+          const verticalScrollOffset = easedScrollProgressExit2 * window.innerHeight * 0.5;
           finalY = arcY + (exitProgress * window.innerHeight * 0.4); // Down to bottom edge
           
           // Reduce scale as they exit
