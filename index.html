@@ -104,6 +104,39 @@
       <div class="horizontal-trail" id="horizontalTrail" data-content="trail"></div>
     </section>
 
+    <!-- Image Upload GUI -->
+    <div class="image-upload-gui" id="imageUploadGUI">
+      <div class="gui-header">
+        <h3>🎨 Custom Images</h3>
+        <button class="gui-toggle" id="guiToggle">⚙️</button>
+      </div>
+      
+      <div class="gui-content" id="guiContent">
+        <div class="upload-section">
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-content">
+              <div class="upload-icon">📁</div>
+              <p>Drag & drop images here or <button class="browse-btn" id="browseBtn">browse</button></p>
+              <small>Recommended: 200x282px, JPG/PNG</small>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+          </div>
+        </div>
+        
+        <div class="image-preview-section">
+          <h4>Current Images (10)</h4>
+          <div class="image-previews" id="imagePreviews">
+            <!-- Image previews will be populated here -->
+          </div>
+          <div class="controls">
+            <button class="reset-btn" id="resetBtn">🔄 Reset to Default</button>
+            <button class="shuffle-btn" id="shuffleBtn">🎲 Shuffle Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/script.js"></script>
+    <script type="module" src="/image-gui.js"></script>
   </body>
 </html> 

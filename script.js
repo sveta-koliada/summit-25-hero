@@ -1,16 +1,19 @@
-// Array with image paths (10 unique images)
-const imageUrls = [
-    '/assets/sp-v2-1.jpg',
-    '/assets/sp-v2-2.jpg',
-    '/assets/sp-v2-3.jpg',
-    '/assets/sp-v2-4.jpg',
-    '/assets/sp-v2-5.jpg',
-    '/assets/sp-v2-1.jpg',
-    '/assets/sp-v2-2.jpg',
-    '/assets/sp-v2-3.jpg',
-    '/assets/sp-v2-4.jpg',
-    '/assets/sp-v2-5.jpg'
+// Array with image paths (10 unique images) - can be updated by GUI
+let imageUrls = [
+    '/assets/sp-v3-1.jpg',
+    '/assets/sp-v3-2.jpg',
+    '/assets/sp-v3-3.jpg',
+    '/assets/sp-v3-4.jpg',
+    '/assets/sp-v3-5.jpg',
+    '/assets/sp-v3-6.jpg',
+    '/assets/sp-v3-1.jpg',
+    '/assets/sp-v3-2.jpg',
+    '/assets/sp-v3-3.jpg',
+    '/assets/sp-v3-4.jpg'
   ];
+
+  // Make imageUrls globally accessible for GUI
+  window.imageUrls = imageUrls;
   
   class HorizontalImageTrail {
     constructor() {
@@ -34,6 +37,11 @@ const imageUrls = [
       this.init();
       this.setupScrollListener();
       this.handleResize();
+      
+      // Listen for image updates from GUI
+      window.addEventListener('imagesUpdated', (e) => {
+        this.updateImagesFromGUI(e.detail.images);
+      });
     }
   
     // Helper method to find elements by data-content attribute
@@ -354,6 +362,72 @@ const imageUrls = [
         this.updateImagePositions();
       });
     }
+
+    // Method to update images from GUI
+    updateImagesFromGUI(newImages) {
+      // Update global imageUrls
+      imageUrls.length = 0;
+      imageUrls.push(...newImages);
+      
+      // Update existing image elements
+      this.images.forEach((imgData, index) => {
+        if (index < newImages.length) {
+          imgData.element.src = newImages[index];
+        }
+      });
+      
+      // If we have more new images than existing elements, create new ones
+      if (newImages.length > this.images.length) {
+        const arcPoints = this.calculateArcPoints();
+        
+        for (let i = this.images.length; i < newImages.length; i++) {
+          const img = document.createElement('img');
+          img.className = 'trail-image';
+          img.src = newImages[i];
+          
+          // Gradient rotation from -5° to 5° across the trail
+          const minRotation = -5;
+          const maxRotation = 5;
+          const rotationProgress = i / (newImages.length - 1);
+          const rotation = minRotation + (maxRotation - minRotation) * rotationProgress;
+          
+          // Initial position
+          const x = arcPoints.leftX + (i * this.imageSpacing);
+          const progress = i / (newImages.length - 1);
+          const leftY = arcPoints.leftY;
+          const rightY = arcPoints.rightY;
+          const linearY = leftY + (rightY - leftY) * progress;
+          const arcHeight = Math.abs(leftY - rightY) * 0.3;
+          const arcOffset = Math.sin(progress * Math.PI) * arcHeight;
+          const y = linearY - arcOffset;
+          
+          img.style.left = `${x}px`;
+          img.style.top = `${y}px`;
+          img.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+          img.style.opacity = '1';
+          
+          this.container.appendChild(img);
+          this.images.push({
+            element: img,
+            index: i,
+            initialX: x,
+            initialY: y,
+            rotation: rotation,
+            isVisible: true,
+            arcPoints: arcPoints
+          });
+        }
+      }
+      
+      // Update total images count
+      this.totalImages = newImages.length;
+      
+      // Recalculate visible images
+      this.visibleImages = this.calculateVisibleImages();
+      
+      // Update positions
+      this.updateImagePositions();
+    }
   }
   
   // Ensure page starts from top on any load/refresh
@@ -366,7 +440,8 @@ const imageUrls = [
     // Always start from the top of the page on page load/refresh
     window.scrollTo(0, 0);
     
-    new HorizontalImageTrail();
+    // Make the trail instance globally accessible for GUI
+    window.horizontalImageTrail = new HorizontalImageTrail();
   });
   
   // Additional fallback for when page is fully loaded
