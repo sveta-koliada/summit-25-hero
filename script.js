@@ -1,20 +1,15 @@
-// Array with image paths (15 unique images)
+// Array with image paths (10 unique images)
 const imageUrls = [
-    '/assets/img1.jpeg',
-    '/assets/img2.jpeg',
-    '/assets/img3.jpeg',
-    '/assets/img4.jpeg',
-    '/assets/img5.jpeg',
-    '/assets/img6.jpeg',
-    '/assets/img7.jpeg',
-    '/assets/img8.jpeg',
-    '/assets/img9.jpeg',
-    '/assets/img10.jpeg',
-    '/assets/img11.jpeg',
-    '/assets/img12.jpeg',
-    '/assets/img13.jpeg',
-    '/assets/img14.jpeg',
-    '/assets/img15.jpeg'
+    '/assets/sp-1.jpg',
+    '/assets/sp-2.jpg',
+    '/assets/sp-3.jpg',
+    '/assets/sp-4.jpg',
+    '/assets/sp-5.jpg',
+    '/assets/sp-6.jpg',
+    '/assets/sp-7.jpg',
+    '/assets/sp-8.jpg',
+    '/assets/sp-9.jpg',
+    '/assets/sp-10.jpg'
   ];
   
   class HorizontalImageTrail {
@@ -23,7 +18,7 @@ const imageUrls = [
       this.container = document.getElementById('horizontalTrail'); // [data-content="trail"]
       
       // Animation parameters
-      this.totalImages = 15; // Total number of images
+      this.totalImages = 10; // Total number of images
       this.imageWidth = 200; // Image width
       this.imageSpacing = 250; // Distance between images
       this.visibleImages = this.calculateVisibleImages(); // Automatic calculation of visible images
@@ -95,7 +90,7 @@ const imageUrls = [
         const leftX = 50;
         
         // Calculate Y positions so the arc is below hero-content
-        const heroMargin = 200; // Margin from hero-content
+        const heroMargin = 300; // Margin from hero-content
         
         // Minimum Y position for left point - below hero-content
         const minLeftY = heroInfo.bottom + heroMargin;
@@ -142,7 +137,7 @@ const imageUrls = [
       // Get adaptive arc points
       const arcPoints = this.calculateArcPoints();
       
-      // Create all 15 images
+      // Create all 10 images
       for (let i = 0; i < this.totalImages; i++) {
         const img = document.createElement('img');
         img.className = 'trail-image';

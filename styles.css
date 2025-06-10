@@ -26,7 +26,7 @@
   
   /* Пространство для анимации между секциями */
   .animation-space {
-    height: 150vh;
+    height: 100vh;
     position: relative;
   }
   
@@ -154,7 +154,7 @@
   .trail-image {
     position: absolute;
     width: 200px;
-    height: 250px;
+    height: 282px;
     object-fit: cover;
     transform-origin: center;
     pointer-events: none;
@@ -269,7 +269,7 @@
     }
     
     .animation-space {
-      height: 120vh;
+      height: 80vh;
     }
     
     .tracks-section {
