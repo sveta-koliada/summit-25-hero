@@ -2,7 +2,8 @@ class ImageUploadGUI {
   constructor() {
     console.log('Initializing ImageUploadGUI...');
     
-    this.defaultImages = [
+    // Get original default images from global imageUrls and preserve them
+    this.originalDefaultImages = window.imageUrls ? [...window.imageUrls] : [
       '/assets/sp-v3-1.jpg',
       '/assets/sp-v3-2.jpg',
       '/assets/sp-v3-3.jpg',
@@ -14,6 +15,9 @@ class ImageUploadGUI {
       '/assets/sp-v3-3.jpg',
       '/assets/sp-v3-4.jpg'
     ];
+    
+    // Current default images for filling empty slots (can be updated)
+    this.defaultImages = [...this.originalDefaultImages];
     
     // Sync with global imageUrls if it exists
     if (window.imageUrls && window.imageUrls.length > 0) {
@@ -153,12 +157,12 @@ class ImageUploadGUI {
       const emptySlots = this.currentImages.filter(img => img === null || img === undefined).length;
       console.log(`Empty slots remaining: ${emptySlots}`);
       
-      // Fill empty slots with default images if needed
+      // Fill empty slots with original default images if needed
       if (emptySlots > 0) {
         for (let i = 0; i < this.currentImages.length; i++) {
           if (this.currentImages[i] === null || this.currentImages[i] === undefined) {
-            const defaultIndex = i % this.defaultImages.length;
-            this.currentImages[i] = this.defaultImages[defaultIndex];
+            const defaultIndex = i % this.originalDefaultImages.length;
+            this.currentImages[i] = this.originalDefaultImages[defaultIndex];
           }
         }
       }
@@ -173,10 +177,10 @@ class ImageUploadGUI {
     if (this.currentImages.length > 1) {
       this.currentImages.splice(index, 1);
       
-      // If we have less than max images, add a default one
+      // If we have less than max images, add an original default one
       if (this.currentImages.length < this.maxImages) {
-        const defaultIndex = this.currentImages.length % this.defaultImages.length;
-        this.currentImages.push(this.defaultImages[defaultIndex]);
+        const defaultIndex = this.currentImages.length % this.originalDefaultImages.length;
+        this.currentImages.push(this.originalDefaultImages[defaultIndex]);
       }
       
       this.renderPreviews();
@@ -221,7 +225,8 @@ class ImageUploadGUI {
   }
   
   resetToDefault() {
-    this.currentImages = [...this.defaultImages];
+    // Reset to original default images (not current window.imageUrls which might be user images)
+    this.currentImages = [...this.originalDefaultImages];
     this.renderPreviews();
     this.updateAnimation();
   }
