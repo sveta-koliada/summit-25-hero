@@ -145,8 +145,8 @@ const imageUrls = [
         // Take image from array (without repetitions)
         img.src = imageUrls[i];
         
-        // Random rotation
-        const rotation = (Math.random() - 0.5) * 20;
+        // No rotation - images stay straight
+        const rotation = 0;
         
         // Initial position - images arranged in arc
         const x = arcPoints.leftX + (i * this.imageSpacing);
