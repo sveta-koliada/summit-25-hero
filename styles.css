@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  
+  /* Принудительно убираем любой серый фон */
+  body {
+    background: white !important;
+  }
+  
+  /* Контент для скролла */
+  .scroll-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Пространство для анимации между секциями */
+  .animation-space {
+    height: 150vh;
+    position: relative;
+  }
+  
+  /* Hero Section Styles */
+  .hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 4rem 2rem;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+    text-align: left;
+  }
+  
+  .meta-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  .meta-icon {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .hero-title {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    margin-bottom: 1.5rem;
+    color: #000;
+  }
+  
+  .hero-features {
+    margin-bottom: 1.5rem;
+  }
+  
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .icon {
+    font-size: 1rem;
+  }
+  
+  .cta-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .register-btn {
+    background: #FA0CF7;
+    color: white;
+    border: none;
+    height: 3.5rem;
+    padding: 0 2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .register-btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .pricing {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .old-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.1rem;
+  }
+  
+  .new-price {
+    background: #FA0CF7;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  /* Фиксированная секция с анимацией */
+  .trail-container-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  
+  .horizontal-trail {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+  }
+  
+  /* Стили для изображений трейла */
+  .trail-image {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    transform-origin: center;
+    pointer-events: none;
+    will-change: transform;
+    opacity: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Анимация появления */
+  .trail-image.entering {
+    transform: scale(0.8) translateX(100px);
+    opacity: 0;
+  }
+  
+  .trail-image.visible {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+  }
+  
+  .trail-image.exiting {
+    transform: scale(0.8) translateX(-100px);
+    opacity: 0;
+  }
+  
+  /* Tracks Section Styles */
+  .tracks-section {
+    padding: 6rem 2rem 6rem 2rem;
+    display: block;
+  }
+  
+  .tracks-header {
+    margin-bottom: 4rem;
+    text-align: left;
+  }
+  
+  .tracks-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  .tracks-title {
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    color: #000;
+    margin: 0;
+  }
+  
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+  }
+  
+  .track-card {
+    background: #fff;
+    overflow: visible;
+    padding-right: 10rem;
+  }
+  
+  .track-image {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .track-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .track-content {
+    padding: 1rem 0 0 0;
+    text-align: left !important;
+  }
+  
+  .track-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: #000;
+  }
+  
+  .track-content p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #666;
+    margin: 0;
+    text-align: left;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .hero-section {
+      height: 100vh;
+      padding: 2rem 1rem;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+    }
+    
+    .animation-space {
+      height: 120vh;
+    }
+    
+    .tracks-section {
+      padding: 4rem 1rem 8rem 1rem;
+    }
+    
+    .tracks-title {
+      font-size: 4rem;
+    }
+    
+    .tracks-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 1.5rem;
+    }
+    
+    .track-image {
+      width: 200px;
+      height: 200px;
+    }
+  } 
