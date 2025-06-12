@@ -231,7 +231,7 @@
 
             const visibleWidth = window.innerWidth;
             const totalWidth = this.totalImages * this.imageSpacing;
-            const maxOffset = (this.totalImages - this.visibleImages) * this.imageSpacing;
+            const maxOffset = ((this.totalImages + 1) * this.imageSpacing) - window.innerWidth;
             const offset = this.horizontalProgress * maxOffset;
             const halfImageWidth = this.imageWidth / 2;
             const imageSpacingDouble = this.imageSpacing * 2;
