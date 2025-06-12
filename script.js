@@ -175,11 +175,19 @@
                 card.style.position = 'fixed';
                 card.style.left = `${x}px`;
                 card.style.top = `${position.y}px`;
-                card.style.transform = `translate(-50%, -50%) rotate(${position.angle}deg)`;
-                card.style.opacity = '1';
+                card.style.transform = `translate(-50%, -50%) rotate(${position.angle}deg) scale(0.8)`;
+                card.style.opacity = '0';
+                card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
                 card.style.zIndex = '900';
 
                 this.container.appendChild(card);
+                
+                // Add stagger effect
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = `translate(-50%, -50%) rotate(${position.angle}deg) scale(1)`;
+                }, i * 100); // 100ms delay between each card
+
                 this.images.push({
                     element: card,
                     positionIndex: i,
@@ -231,7 +239,7 @@
 
             const visibleWidth = window.innerWidth;
             const totalWidth = this.totalImages * this.imageSpacing;
-            const maxOffset = ((this.totalImages + 1) * this.imageSpacing) - window.innerWidth;
+            const maxOffset = Math.max(0, (this.totalImages - this.visibleImages + 1)) * this.imageSpacing;
             const offset = this.horizontalProgress * maxOffset;
             const halfImageWidth = this.imageWidth / 2;
             const imageSpacingDouble = this.imageSpacing * 2;
