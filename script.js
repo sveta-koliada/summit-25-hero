@@ -177,7 +177,7 @@
                 card.style.top = `${position.y}px`;
                 card.style.transform = `translate(-50%, -50%) rotate(${position.angle}deg)`;
                 card.style.opacity = '1';
-                card.style.zIndex = '1000';
+                card.style.zIndex = '900';
 
                 this.container.appendChild(card);
                 this.images.push({
