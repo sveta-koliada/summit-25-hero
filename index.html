@@ -11,7 +11,7 @@
   <body>
     <div class="scroll-content">
       <section class="hero-section">
-        <div class="hero-content" data-content="hero">
+        <div class="hero-content">
           <div class="meta-logo">
             <span class="meta-icon">∞</span>
             <span>Meta Business Partners</span>
@@ -47,8 +47,10 @@
         </div>
       </section>
       
-      <!-- Пространство для анимации картинок -->
-      <section class="animation-space" data-content="animation"></section>
+      <!-- Секция с анимацией картинок -->
+      <section class="animation-section" data-content="animation">
+        <div class="horizontal-trail" data-content="trail"></div>
+      </section>
       
       <section class="tracks-section" data-content="tracks">
         <div class="tracks-header">
@@ -100,43 +102,115 @@
       </section>
     </div>
 
-    <section class="trail-container-fixed" data-content="trail-container">
-      <div class="horizontal-trail" id="horizontalTrail" data-content="trail"></div>
-    </section>
-
-    <!-- Image Upload GUI -->
-    <div class="image-upload-gui" id="imageUploadGUI">
-      <div class="gui-header">
-        <h3>🎨 Custom Images</h3>
-        <button class="gui-toggle" id="guiToggle">⚙️</button>
-      </div>
-      
-      <div class="gui-content" id="guiContent">
-        <div class="upload-section">
-          <div class="drop-zone" id="dropZone">
-            <div class="drop-zone-content">
-              <div class="upload-icon">📁</div>
-              <p>Drag & drop images here or <button class="browse-btn" id="browseBtn">browse</button></p>
-              <small>Recommended: 200x282px, JPG/PNG</small>
-            </div>
-            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+    <!-- Hidden CMS Collection for Webflow -->
+    <div class="hidden-cms" data-content="cms-collection" style="display: none;">
+      <div class="cms-collection">
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-1.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">John</h3>
+            <p data-speaker="surname">Smith</p>
           </div>
         </div>
-        
-        <div class="image-preview-section">
-          <h4>Current Images (10)</h4>
-          <div class="image-previews" id="imagePreviews">
-            <!-- Image previews will be populated here -->
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-2.jpg" alt="Speaker Name" data-speaker="image">
           </div>
-          <div class="controls">
-            <button class="reset-btn" id="resetBtn">🔄 Reset to Default</button>
-            <button class="shuffle-btn" id="shuffleBtn">🎲 Shuffle Order</button>
+          <div class="cms-content">
+            <h3 data-speaker="name">Sarah</h3>
+            <p data-speaker="surname">Johnson</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-3.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">Michael</h3>
+            <p data-speaker="surname">Brown</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-4.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">Emma</h3>
+            <p data-speaker="surname">Wilson</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-5.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">David</h3>
+            <p data-speaker="surname">Lee</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-6.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">Lisa</h3>
+            <p data-speaker="surname">Anderson</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-1.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">James</h3>
+            <p data-speaker="surname">Wilson</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-2.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">Rachel</h3>
+            <p data-speaker="surname">Martinez</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-3.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">Thomas</h3>
+            <p data-speaker="surname">Clark</p>
+          </div>
+        </div>
+        <div class="cms-item" data-content="cms-item">
+          <div class="cms-image">
+            <img src="/assets/sp-v3-4.jpg" alt="Speaker Name" data-speaker="image">
+          </div>
+          <div class="cms-content">
+            <h3 data-speaker="name">Sophie</h3>
+            <p data-speaker="surname">Taylor</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Hidden Card Template for Webflow -->
+    <div class="hidden-template" data-content="card-template" style="display: none;">
+      <div class="track-card-template" data-content="card-template-item">
+        <div class="track-image">
+          <img src="" alt="" data-speaker="image">
+        </div>
+        <div class="track-content">
+          <h3 data-speaker="name"></h3>
+          <p data-speaker="surname"></p>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/script.js"></script>
-    <script type="module" src="/image-gui.js"></script>
   </body>
 </html> 

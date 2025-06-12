@@ -24,15 +24,16 @@
     z-index: 1;
   }
   
-  /* Пространство для анимации между секциями */
-  .animation-space {
-    height: 100vh;
+  /* Секция с анимацией изображений */
+  .animation-section {
+    height: 60vh;
     position: relative;
+    overflow: hidden;
   }
   
   /* Hero Section Styles */
   .hero-section {
-    height: 100vh;
+    height: auto;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -128,55 +129,11 @@
     font-size: 1.1rem;
   }
   
-  /* Фиксированная секция с анимацией */
-  .trail-container-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  
   .horizontal-trail {
     position: relative;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 50px;
-  }
-  
-  /* Стили для изображений трейла */
-  .trail-image {
-    position: absolute;
-    width: 200px;
-    height: 282px;
-    object-fit: cover;
-    transform-origin: center;
     pointer-events: none;
-    will-change: transform;
-    opacity: 1;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  /* Анимация появления */
-  .trail-image.entering {
-    transform: scale(0.8) translateX(100px);
-    opacity: 0;
-  }
-  
-  .trail-image.visible {
-    transform: scale(1) translateX(0);
-    opacity: 1;
-  }
-  
-  .trail-image.exiting {
-    transform: scale(0.8) translateX(-100px);
-    opacity: 0;
   }
   
   /* Tracks Section Styles */
@@ -220,9 +177,9 @@
   .track-card {
     background: #fff;
     overflow: visible;
-    padding-right: 10rem;
   }
   
+  /* Common styles for both static and animated cards */
   .track-image {
     width: 200px;
     height: 200px;
@@ -268,7 +225,7 @@
       font-size: 3.5rem;
     }
     
-    .animation-space {
+    .animation-section {
       height: 80vh;
     }
     
@@ -292,200 +249,74 @@
     }
   }
 
-  /* Image Upload GUI Styles */
-  .image-upload-gui {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 1000;
-    max-width: 320px;
-    transition: all 0.3s ease;
+  /* Hidden CMS Collection */
+  .hidden-cms {
+    display: none;
   }
 
-  .gui-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  .cms-collection {
+    display: none;
   }
 
-  .gui-header h3 {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
+  .cms-item {
+    display: none;
   }
 
-  .gui-toggle {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-    transition: background 0.2s;
+  /* Hidden Card Template */
+  .hidden-template {
+    display: none;
   }
 
-  .gui-toggle:hover {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .gui-content {
-    padding: 16px;
-    height: 100%;
-    overflow-y: auto;
-    transition: all 0.3s ease;
-  }
-
-  .gui-content.collapsed {
-    max-height: 0;
-    padding: 0 16px;
+  /* Card dimensions */
+  [data-content="card-template-item"] {
+    width: 200px;
+    height: 282px;
+    background: #fff;
+    border-radius: 0;
     overflow: hidden;
-  }
-
-  .upload-section {
-    margin-bottom: 20px;
-  }
-
-  .drop-zone {
-    border: 2px dashed #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .drop-zone:hover,
-  .drop-zone.drag-over {
-    border-color: #FA0CF7;
-    background: rgba(250, 12, 247, 0.05);
-  }
-
-  .drop-zone-content {
-    pointer-events: none;
-  }
-
-  .upload-icon {
-    font-size: 32px;
-    margin-bottom: 8px;
-  }
-
-  .drop-zone p {
-    margin: 8px 0;
-    font-size: 14px;
-    color: #666;
-  }
-
-  .browse-btn {
-    background: none;
-    border: none;
-    color: #FA0CF7;
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 14px;
-    pointer-events: auto;
-  }
-
-  .drop-zone small {
-    color: #999;
-    font-size: 12px;
-  }
-
-  .image-preview-section h4 {
-    margin: 0 0 12px 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-  }
-
-  .image-previews {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-
-  .preview-item {
     position: relative;
-    aspect-ratio: 200/282;
-    border-radius: 4px;
+    margin-right: 35px;
+  }
+
+  [data-content="card-template-item"] .track-image {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    border: 2px solid transparent;
-    transition: border-color 0.2s;
   }
 
-  .preview-item:hover {
-    border-color: #FA0CF7;
-  }
-
-  .preview-item img {
+  [data-content="card-template-item"] .track-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
-  .preview-item .remove-btn {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    font-size: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  [data-content="card-template-item"] .track-content {
+    padding: 1rem;
+    background: #fff;
     opacity: 0;
-    transition: opacity 0.2s;
   }
 
-  .preview-item:hover .remove-btn {
-    opacity: 1;
+  [data-content="card-template-item"] .track-content h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+    color: #000;
+    opacity: 0;
   }
 
-  .controls {
-    display: flex;
-    gap: 8px;
+  [data-content="card-template-item"] .track-content p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    opacity: 0;
   }
 
-  .reset-btn,
-  .shuffle-btn {
-    flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: white;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
+  /* Hidden elements */
+  [data-content="cms-collection"],
+  [data-content="card-template"] {
+    display: none;
   }
 
-  .reset-btn:hover,
-  .shuffle-btn:hover {
-    background: #f5f5f5;
-    border-color: #FA0CF7;
-  }
 
-  /* Mobile adjustments for GUI */
-  @media (max-width: 768px) {
-    .image-upload-gui {
-      top: 10px;
-      right: 10px;
-      left: 10px;
-      max-width: none;
-    }
-    
-    .image-previews {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  } 
+ 
